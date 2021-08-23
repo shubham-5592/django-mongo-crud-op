@@ -29,9 +29,10 @@ class TutorialHandler(mixins.CreateModelMixin,
 
     def delete(self, request, *args, **kwargs):
         if self.kwargs.get('pk'):                
-            tutorials = get_object_or_404(self.queryset, id=self.kwargs.get('pk'))
-            tutorials.delete()
-            return Response({"details": f"item with id : {self.kwargs.get('pk')} deleted"})
+            # tutorials = get_object_or_404(self.queryset, id=self.kwargs.get('pk'))
+            # tutorials.delete()
+            # return Response({"details": f"item with id : {self.kwargs.get('pk')} deleted"})
+            return mixins.DestroyModelMixin.destroy(request, *args, **kwargs)
         else:
             count_deleted = self.queryset.delete()[0]
             return Response({'details': f'{count_deleted} rows deleted'})
